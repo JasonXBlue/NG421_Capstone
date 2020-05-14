@@ -28,7 +28,7 @@ namespace capstone.Controllers
 
         }
         [HttpPost]
-        public Teacher Post([FromBody]Teacher teacher)
+        public Teacher Post([FromBody] Teacher teacher)
         {
             using (var context = new ApplicationDbContext())
             {
@@ -39,3 +39,5 @@ namespace capstone.Controllers
         }
     }
 }
+
+//test
