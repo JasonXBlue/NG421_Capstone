@@ -51,7 +51,11 @@ import { AppointmentComponent } from "./appointment/appointment.component";
         component: TeacherComponent,
         canActivate: [AuthorizeGuard],
       },
-      { path: "appointments", component: AppointmentComponent },
+      {
+        path: "appointments",
+        component: AppointmentComponent,
+        canActivate: [AuthorizeGuard],
+      },
     ]),
     BrowserAnimationsModule,
   ],

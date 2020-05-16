@@ -28,13 +28,14 @@ namespace capstone.Controllers
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Appointment[] appointments = null;
-            _context.Appointments.Where(a => a.User.Id == userId).ToArray();
+            _context.Appointments.Where(a => a.UserId == userId).ToArray();
 
             return appointments;
         }
         [HttpPost]
         public Appointment Post([FromBody] Appointment appointment)
         {
+            appointment.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
             return appointment;
