@@ -21,8 +21,6 @@ namespace capstone.Models
 
         public string ServiceType { get; set; }
 
-        public string UserId { get; set; }
-
         public ApplicationUser User { get; set; }
     }
 }
