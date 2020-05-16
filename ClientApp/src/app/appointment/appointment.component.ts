@@ -22,6 +22,7 @@ export class AppointmentComponent implements OnInit {
 
   async ngOnInit() {
     this.appointments = await this.service.getAppointments();
+    console.log(this.appointments);
   }
 
   async save() {
