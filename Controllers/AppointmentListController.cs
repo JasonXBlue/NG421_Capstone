@@ -14,11 +14,11 @@ namespace capstone.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class AppointmentController : ControllerBase
+    public class AppointmentListController : ControllerBase
     {
         private ApplicationDbContext _context;
 
-        public AppointmentController(ApplicationDbContext context)
+        public AppointmentListController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -28,7 +28,7 @@ namespace capstone.Controllers
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Appointment[] appointments = null;
-            _context.Appointments.Where(a => a.UserId == userId).ToArray();
+            appointments = _context.Appointments.Where(a => a.UserId == userId).ToArray();
 
             return appointments;
         }

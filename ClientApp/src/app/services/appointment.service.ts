@@ -13,13 +13,13 @@ export class AppointmentService {
 
   async getAppointments() {
     return this.httpClient
-      .get<IAppointment[]>(this.baseUrl + "appointment")
+      .get<IAppointment[]>(this.baseUrl + "appointmentlist")
       .toPromise();
   }
 
   async addAppointment(appointment: IAppointment) {
     return await this.httpClient
-      .post<IAppointment>(this.baseUrl + "appointment", appointment)
+      .post<IAppointment>(this.baseUrl + "appointmentlist", appointment)
       .toPromise();
   }
 }
