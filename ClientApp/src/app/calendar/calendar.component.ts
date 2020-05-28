@@ -39,7 +39,7 @@ const colors: any = {
 };
 
 @Component({
-  selector: "mwl-demo-component",
+  selector: "app-calendar",
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ["./calendar.component.css"],
   templateUrl: "./calendar.component.html",

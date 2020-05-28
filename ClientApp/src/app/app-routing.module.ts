@@ -5,6 +5,7 @@ import { HomeComponent } from "./home/home.component";
 import { CounterComponent } from "./counter/counter.component";
 import { AppointmentComponent } from "./appointment/appointment.component";
 import { AuthorizeGuard } from "src/api-authorization/authorize.guard";
+import { CalendarComponent } from "./calendar/calendar.component";
 
 @NgModule({
   declarations: [],
@@ -18,6 +19,7 @@ import { AuthorizeGuard } from "src/api-authorization/authorize.guard";
         component: AppointmentComponent,
         canActivate: [AuthorizeGuard],
       },
+      { path: "calendar", component: CalendarComponent },
     ]),
   ],
   exports: [RouterModule],
