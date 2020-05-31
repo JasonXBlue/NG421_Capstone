@@ -49,6 +49,9 @@ export class CalendarComponent {
 
   view: CalendarView = CalendarView.Month;
 
+  //exclude Sunday as non-working day for client
+  excludeDays: number[] = [0];
+
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
