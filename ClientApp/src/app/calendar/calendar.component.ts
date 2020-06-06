@@ -56,6 +56,8 @@ export class CalendarComponent {
 
   viewDate: Date = new Date();
 
+  isDragging = false;
+
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -139,28 +141,59 @@ export class CalendarComponent {
       this.viewDate = date;
     }
   }
+  // *** boilerplate code from angular-calendar ***
+  // eventTimesChanged({
+  //   event,
+  //   newStart,
+  //   newEnd,
+  // }: CalendarEventTimesChangedEvent): void {
+  //   this.events = this.events.map((iEvent) => {
+  //     if (iEvent === event) {
+  //       return {
+  //         ...event,
+  //         start: newStart,
+  //         end: newEnd,
+  //       };
+  //     }
+  //     return iEvent;
+  //   });
+  //   this.handleEvent("Dropped or resized", event);
+  // }
 
   eventTimesChanged({
     event,
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent("Dropped or resized", event);
+    if (this.isDragging) {
+      return;
+    }
+    this.isDragging = true;
+
+    event.start = newStart;
+    event.end = newEnd;
+    this.refresh.next();
+
+    setTimeout(() => {
+      this.isDragging = false;
+    }, 1000);
   }
 
+  // *** original code from example ***
+  // handleEvent(action: string, event: CalendarEvent): void {
+  //   this.modalData = { event, action };
+  //   this.modal.open(this.modalContent, { size: "lg" });
+  // }
+
   handleEvent(action: string, event: CalendarEvent): void {
+    event.start = event.start;
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: "lg" });
+    document
+      .getElementsByTagName("ngb-modal-window")
+      .item(0)
+      .setAttribute("id", "modal");
+    document.getElementById("modal").style.opacity = "1";
   }
 
   addEvent(): void {
@@ -180,6 +213,26 @@ export class CalendarComponent {
     ];
   }
 
+  hourSegmentClicked(event) {
+    let newEvent: CalendarEvent = {
+      start: event.date,
+      end: addHours(event.date, 1),
+      title: "TEST EVENT",
+      cssClass: "custom-event",
+      color: {
+        primary: "#488aff",
+        secondary: "#bbd0f5",
+      },
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+    };
+    this.events.push(newEvent);
+    this.refresh.next();
+  }
+
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
@@ -190,5 +243,10 @@ export class CalendarComponent {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  dayHeaderClicked(evn) {
+    this.viewDate = evn.day.date; //get the clicked date value
+    console.log(this.viewDate);
   }
 }

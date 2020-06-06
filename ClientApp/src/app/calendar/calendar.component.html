@@ -83,8 +83,11 @@
     [dayStartHour]="8"
     [dayEndHour]="17"
     [refresh]="refresh"
+    [weekStartsOn]="1"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
+    (hourSegmentClicked)="hourSegmentClicked($event)"
+    (dayHeaderClicked)="dayHeaderClicked($event)"
   >
   </mwl-calendar-week-view>
   <mwl-calendar-day-view
