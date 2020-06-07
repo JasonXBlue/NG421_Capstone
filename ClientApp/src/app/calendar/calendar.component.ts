@@ -214,7 +214,7 @@ export class CalendarComponent {
     let newEvent: CalendarEvent = {
       start: event.date,
       end: addHours(event.date, 1),
-      title: "TEST EVENT",
+      title: "Enter name:",
       cssClass: "custom-event",
       color: {
         primary: "#488aff",
@@ -232,6 +232,7 @@ export class CalendarComponent {
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
+    this.modal.dismissAll();
   }
 
   setView(view: CalendarView) {
