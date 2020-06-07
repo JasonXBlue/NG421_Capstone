@@ -22,6 +22,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from "angular-calendar";
+import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
 const colors: any = {
   red: {
@@ -46,6 +47,9 @@ const colors: any = {
 })
 export class CalendarComponent {
   @ViewChild("modalContent", { static: true }) modalContent: TemplateRef<any>;
+
+  name = new FormControl("");
+  editApptForm: FormGroup;
 
   view: CalendarView = CalendarView.Month;
 
@@ -126,7 +130,11 @@ export class CalendarComponent {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(
+    private modal: NgbModal,
+    private fb: FormBuilder,
+    private modalService: NgbModal
+  ) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -179,21 +187,10 @@ export class CalendarComponent {
     }, 1000);
   }
 
-  // *** original code from example ***
-  // handleEvent(action: string, event: CalendarEvent): void {
-  //   this.modalData = { event, action };
-  //   this.modal.open(this.modalContent, { size: "lg" });
-  // }
-
+  //*** original code from example ***
   handleEvent(action: string, event: CalendarEvent): void {
-    event.start = event.start;
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: "lg" });
-    document
-      .getElementsByTagName("ngb-modal-window")
-      .item(0)
-      .setAttribute("id", "modal");
-    document.getElementById("modal").style.opacity = "1";
   }
 
   addEvent(): void {
@@ -248,5 +245,11 @@ export class CalendarComponent {
   dayHeaderClicked(evn) {
     this.viewDate = evn.day.date; //get the clicked date value
     console.log(this.viewDate);
+  }
+
+  ngOnInit() {
+    this.editApptForm = this.fb.group({
+      title: [""],
+    });
   }
 }
