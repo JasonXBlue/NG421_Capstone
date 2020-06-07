@@ -193,21 +193,26 @@ export class CalendarComponent {
     this.modal.open(this.modalContent, { size: "lg" });
   }
 
+  // addEvent(): void {
+  //   this.events = [
+  //     ...this.events,
+  //     {
+  //       title: "New event",
+  //       start: startOfDay(new Date()),
+  //       end: endOfDay(new Date()),
+  //       color: colors.red,
+  //       draggable: true,
+  //       resizable: {
+  //         beforeStart: true,
+  //         afterEnd: true,
+  //       },
+  //     },
+  //   ];
+  // }
+
   addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: "New event",
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
+    //this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: "lg" });
   }
 
   hourSegmentClicked(event) {

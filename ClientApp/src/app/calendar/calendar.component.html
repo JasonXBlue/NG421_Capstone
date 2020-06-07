@@ -104,11 +104,63 @@
   </mwl-calendar-day-view>
 </div>
 
+<!-- *** modal *** -->
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Appointment</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div> -->
+    <!-- <div>
+      Title:
+      <pre>{{ modalData?.event.title }}</pre>
+    </div> -->
+    <div>
+      <form [formGroup]="editApptForm">
+        <div class="form-group row">
+          <label for="title" class="col-sm-4 col-form-label">Name:</label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              [(ngModel)]="modalData?.event.title"
+              class="form-control"
+              formControlName="title"
+              id="title"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      Start Time:
+      <pre>{{ modalData?.event.start }}</pre>
+    </div>
+    <!-- <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="close()">
+      SAVE
+    </button>
+    <button class="btn btn-danger" (click)="deleteEvent(modalData.event)">
+      Delete
+    </button>
+  </div>
+</ng-template>
+
 <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
 
 <br /><br /><br />
 
-<h3>
+<!-- <h3>
   Edit events
   <button class="btn btn-primary float-right" (click)="addEvent()">
     Add new
@@ -191,55 +243,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<ng-template #modalContent let-close="close">
-  <div class="modal-header">
-    <h5 class="modal-title">Appointment</h5>
-    <button type="button" class="close" (click)="close()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <!-- <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
-    </div> -->
-    <!-- <div>
-      Title:
-      <pre>{{ modalData?.event.title }}</pre>
-    </div> -->
-    <div>
-      <form [formGroup]="editApptForm">
-        <div class="form-group row">
-          <label for="title" class="col-sm-4 col-form-label">Name:</label>
-          <div class="col-sm-8">
-            <input
-              type="text"
-              [(ngModel)]="modalData?.event.title"
-              class="form-control"
-              formControlName="title"
-              id="title"
-            />
-          </div>
-        </div>
-      </form>
-    </div>
-    <div>
-      Start Time:
-      <pre>{{ modalData?.event.start }}</pre>
-    </div>
-    <!-- <div>
-      Event:
-      <pre>{{ modalData?.event | json }}</pre>
-    </div> -->
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="close()">
-      SAVE
-    </button>
-    <button class="btn btn-danger" (click)="deleteEvent(modalData.event)">
-      Delete
-    </button>
-  </div>
-</ng-template>
+</div> -->
