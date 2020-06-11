@@ -14,7 +14,7 @@ import { startOfYear, subYears } from "date-fns";
 // })
 
 // get your own key from https://holidayapi.com/
-const HOLIDAY_API_KEY = "b8df5924-7580-491b-b7d9-095c436ac8aa";
+const HOLIDAY_API_KEY = "79e7b46541aa1ae9154a5cc239ab80ccaae02fe1";
 
 // change this to your own country
 const COUNTRY_CODE = "US";
@@ -43,13 +43,16 @@ export class HolidayApiService implements OnInit {
 
   private fetchHolidays() {
     this.http
-      .get<{ holidays: Holiday[] }>("https://holidayapi.com/v1/holidays", {
-        params: {
-          country: COUNTRY_CODE,
-          year: String(new Date().getFullYear() - 1),
-          key: HOLIDAY_API_KEY,
-        },
-      })
+      .get<{ holidays: Holiday[] }>(
+        "https://calendarific.com/api/v2/holidays",
+        {
+          params: {
+            country: COUNTRY_CODE,
+            year: String(new Date().getFullYear() - 1),
+            key: HOLIDAY_API_KEY,
+          },
+        }
+      )
       .subscribe(({ holidays }) => {
         this.events = holidays.map((holiday) => {
           return {
