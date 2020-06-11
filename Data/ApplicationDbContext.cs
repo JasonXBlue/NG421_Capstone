@@ -20,6 +20,8 @@ namespace capstone.Data
 
         public DbSet<Appointment> Appointments { get; set; }
 
+        public DbSet<Event> Events { get; set; }
+
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
