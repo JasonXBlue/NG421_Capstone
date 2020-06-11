@@ -1,6 +1,7 @@
 export interface Icustomer {
   firstName: string;
   lastName: string;
+  gender: string;
   phone: string;
   email: string;
   stAddress: string;
