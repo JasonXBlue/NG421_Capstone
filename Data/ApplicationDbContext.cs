@@ -22,6 +22,8 @@ namespace capstone.Data
 
         public DbSet<Event> Events { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
