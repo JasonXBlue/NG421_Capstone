@@ -33,12 +33,12 @@ namespace capstone.Controllers
             return events;
         }
         [HttpPost]
-        public Event Post([FromBody] Event event)
+        public Event Post([FromBody] Event calendarEvent)
         {
-            event.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            _context.Events.Add(event);
-        _context.SaveChanges();
-            return event;
+            calendarEvent.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            _context.Events.Add(calendarEvent);
+            _context.SaveChanges();
+            return calendarEvent;
         }
     }
 }
