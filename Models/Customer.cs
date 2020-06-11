@@ -32,6 +32,8 @@ namespace capstone.Models
 
         public int Zip { get; set; }
 
+        public string UserId { get; set; }
+
         public ApplicationUser User { get; set; }
     }
 

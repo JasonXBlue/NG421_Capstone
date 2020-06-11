@@ -22,7 +22,11 @@ namespace capstone.Models
 
         public string ApptType { get; set; }
 
+        public string UserId { get; set; }
+
         public ApplicationUser User { get; set; }
+
+
     }
 
 }
