@@ -9,7 +9,6 @@ import { EventService } from "../services/event.service";
 })
 export class EventComponent implements OnInit {
   event: Ievent = {
-    id: 1,
     start: new Date(),
     end: new Date(),
     title: "",
