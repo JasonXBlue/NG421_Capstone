@@ -19,6 +19,8 @@ import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
 import { FlatpickrModule } from "angularx-flatpickr";
 import { NgbModalModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ReactiveFormsModule } from "@angular/forms";
+import { EventComponent } from './event/event.component';
+import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     CounterComponent,
     AppointmentComponent,
     CalendarComponent,
+    EventComponent,
+    CustomerComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
