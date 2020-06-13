@@ -1,1 +1,55 @@
-<p>customer works!</p>
+<h1 id="tableLabel">Customers</h1>
+
+<p *ngIf="!customers"><em>Loading...</em></p>
+
+<table
+  class="table table-striped"
+  aria-labelledby="tableLabel"
+  *ngIf="customers"
+>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Gender</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of customers">
+      <td>{{ s.firstName }}</td>
+      <td>{{ s.lastName }}</td>
+      <td>{{ s.gender }}</td>
+      <td>{{ s.phone }}</td>
+      <td>{{ s.email }}</td>
+      <td>{{ s.stAddress }}</td>
+      <td>{{ s.city }}</td>
+      <td>{{ s.state }}</td>
+      <td>{{ s.zip }}</td>
+    </tr>
+  </tbody>
+</table>
+First Name
+<input [(ngModel)]="customer.firstName" type="text" name="firstName" />
+Last Name
+<input [(ngModel)]="customer.lastName" type="text" name="lastName" />
+Gender
+<input [(ngModel)]="customer.gender" type="text" name="gender" />
+Phone
+<input [(ngModel)]="customer.phone" type="text" name="phone" />
+Email
+<input [(ngModel)]="customer.email" type="text" name="email" />
+Address
+<input [(ngModel)]="customer.stAddress" type="text" name="stAddress" />
+City
+<input [(ngModel)]="customer.city" type="text" name="city" />
+State
+<input [(ngModel)]="customer.state" type="text" name="state" />
+Zip
+<input [(ngModel)]="customer.zip" type="text" name="zip" />
+<button (click)="save()">Save</button>

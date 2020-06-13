@@ -23,6 +23,7 @@ import {
   CalendarView,
 } from "angular-calendar";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
+import { EventService } from "../services/event.service";
 
 const colors: any = {
   red: {
@@ -133,7 +134,8 @@ export class CalendarComponent {
   constructor(
     private modal: NgbModal,
     private fb: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private Eservice: EventService
   ) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

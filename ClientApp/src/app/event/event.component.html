@@ -1,1 +1,31 @@
-<p>event works!</p>
+<h1 id="tableLabel">Events</h1>
+
+<p *ngIf="!events"><em>Loading...</em></p>
+
+<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="events">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Title</th>
+      <th>Appt Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of events">
+      <td>{{ s.start }}</td>
+      <td>{{ s.end }}</td>
+      <td>{{ s.title }}</td>
+      <td>{{ s.apptType }}</td>
+    </tr>
+  </tbody>
+</table>
+Start
+<input [(ngModel)]="event.start" type="date" name="start" />
+End
+<input [(ngModel)]="event.end" type="date" name="end" />
+Title
+<input [(ngModel)]="event.title" type="text" name="title" />
+ApptType
+<input [(ngModel)]="event.apptType" type="text" name="apptType" />
+<button (click)="save()">Save</button>
