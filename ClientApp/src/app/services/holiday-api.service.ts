@@ -9,11 +9,7 @@ import { CalendarEvent, CalendarView } from "angular-calendar";
 import { HttpClient } from "@angular/common/http";
 import { startOfYear, subYears } from "date-fns";
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-
-// get your own key from https://holidayapi.com/
+// get your own key from https://calendarific.com/
 const HOLIDAY_API_KEY = "79e7b46541aa1ae9154a5cc239ab80ccaae02fe1";
 
 // change this to your own country
@@ -32,7 +28,6 @@ type CalendarEventWithMeta = CalendarEvent<
   providedIn: "root",
 })
 export class HolidayApiService {
-  //export class HolidayApiService implements OnInit {
   view: CalendarView = CalendarView.Month;
 
   viewDate = startOfYear(subYears(new Date(), 1));
@@ -40,10 +35,6 @@ export class HolidayApiService {
   events: CalendarEventWithMeta[] = [];
 
   constructor(private http: HttpClient) {}
-
-  // ngOnInit(): void {
-  //   this.fetchHolidays();
-  // }
 
   public fetchHolidays(): Promise<Holiday> {
     this.http

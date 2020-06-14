@@ -62,6 +62,7 @@ export class CalendarComponent {
 
   //exclude Sunday as non-working day for client
   // excludeDays: number[] = [0];
+  excludeDays: number[];
 
   CalendarView = CalendarView;
 
