@@ -28,28 +28,32 @@ type CalendarEventWithMeta = CalendarEvent<
   { type: "holiday"; holiday: Holiday } | { type: "normal" }
 >;
 
-export class HolidayApiService implements OnInit {
+@Injectable({
+  providedIn: "root",
+})
+export class HolidayApiService {
+  //export class HolidayApiService implements OnInit {
   view: CalendarView = CalendarView.Month;
 
   viewDate = startOfYear(subYears(new Date(), 1));
 
   events: CalendarEventWithMeta[] = [];
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.fetchHolidays();
-  }
+  // ngOnInit(): void {
+  //   this.fetchHolidays();
+  // }
 
-  private fetchHolidays() {
+  public fetchHolidays() {
     this.http
       .get<{ holidays: Holiday[] }>(
         "https://calendarific.com/api/v2/holidays",
         {
           params: {
+            api_key: HOLIDAY_API_KEY,
             country: COUNTRY_CODE,
-            year: String(new Date().getFullYear() - 1),
-            key: HOLIDAY_API_KEY,
+            year: String(new Date().getFullYear()),
           },
         }
       )
@@ -65,7 +69,8 @@ export class HolidayApiService implements OnInit {
             },
           };
         });
-        this.cdr.markForCheck();
+
+        // this.cdr.markForCheck();
       });
   }
 }

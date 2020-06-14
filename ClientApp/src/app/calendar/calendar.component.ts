@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
+  Injectable,
 } from "@angular/core";
 import {
   startOfDay,
@@ -24,6 +25,8 @@ import {
 } from "angular-calendar";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 import { EventService } from "../services/event.service";
+import { HolidayApiService } from "../services/holiday-api.service";
+import { Ievent } from "../interfaces/ievent";
 
 const colors: any = {
   red: {
@@ -45,6 +48,9 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ["./calendar.component.css"],
   templateUrl: "./calendar.component.html",
+})
+@Injectable({
+  providedIn: "root",
 })
 export class CalendarComponent {
   @ViewChild("modalContent", { static: true }) modalContent: TemplateRef<any>;
@@ -131,11 +137,14 @@ export class CalendarComponent {
 
   activeDayIsOpen: boolean = true;
 
+  appts: Ievent[] = [];
+
   constructor(
     private modal: NgbModal,
     private fb: FormBuilder,
     private modalService: NgbModal,
-    private Eservice: EventService
+    private Eservice: EventService,
+    private holiday: HolidayApiService
   ) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -255,9 +264,12 @@ export class CalendarComponent {
     console.log(this.viewDate);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.editApptForm = this.fb.group({
       title: [""],
     });
+    this.holiday.fetchHolidays();
+    this.appts = await this.Eservice.getEvents();
+    console.log(this.appts);
   }
 }
