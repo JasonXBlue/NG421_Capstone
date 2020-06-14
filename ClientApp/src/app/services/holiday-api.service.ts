@@ -45,22 +45,20 @@ export class HolidayApiService {
   //   this.fetchHolidays();
   // }
 
-  public fetchHolidays() {
+  public fetchHolidays(): Promise<Holiday> {
     this.http
-      .get<{ holidays: Holiday[] }>(
-        "https://calendarific.com/api/v2/holidays",
-        {
-          params: {
-            api_key: HOLIDAY_API_KEY,
-            country: COUNTRY_CODE,
-            year: String(new Date().getFullYear()),
-          },
-        }
-      )
-      .subscribe(({ holidays }) => {
-        this.events = holidays.map((holiday) => {
+      .get<CalendarEvent[]>("https://calendarific.com/api/v2/holidays", {
+        params: {
+          api_key: HOLIDAY_API_KEY,
+          country: COUNTRY_CODE,
+          year: String(new Date().getFullYear()),
+        },
+      })
+      .subscribe((holidays) => {
+        this.events = holidays.response.holidays.map((holiday) => {
+          console.log(holiday);
           return {
-            start: new Date(holiday.date),
+            start: new Date(holiday.date.iso),
             title: holiday.name,
             allDay: true,
             meta: {

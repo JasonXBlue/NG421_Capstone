@@ -61,7 +61,7 @@ export class CalendarComponent {
   view: CalendarView = CalendarView.Month;
 
   //exclude Sunday as non-working day for client
-  excludeDays: number[] = [0];
+  // excludeDays: number[] = [0];
 
   CalendarView = CalendarView;
 
@@ -95,49 +95,51 @@ export class CalendarComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: "A 3 day event",
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: "An event with no end date",
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: "A long event that spans 2 months",
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: "A draggable and resizable event",
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+    //   {
+    //     start: subDays(startOfDay(new Date()), 1),
+    //     end: addDays(new Date(), 1),
+    //     title: "A 3 day event",
+    //     color: colors.red,
+    //     actions: this.actions,
+    //     allDay: true,
+    //     resizable: {
+    //       beforeStart: true,
+    //       afterEnd: true,
+    //     },
+    //     draggable: true,
+    //   },
+    //   {
+    //     start: startOfDay(new Date()),
+    //     title: "An event with no end date",
+    //     color: colors.yellow,
+    //     actions: this.actions,
+    //   },
+    //   {
+    //     start: subDays(endOfMonth(new Date()), 3),
+    //     end: addDays(endOfMonth(new Date()), 3),
+    //     title: "A long event that spans 2 months",
+    //     color: colors.blue,
+    //     allDay: true,
+    //   },
+    //   {
+    //     start: addHours(startOfDay(new Date()), 2),
+    //     end: addHours(new Date(), 2),
+    //     title: "A draggable and resizable event",
+    //     color: colors.yellow,
+    //     actions: this.actions,
+    //     resizable: {
+    //       beforeStart: true,
+    //       afterEnd: true,
+    //     },
+    //     draggable: true,
+    //   },
   ];
 
   activeDayIsOpen: boolean = true;
 
   appts: Ievent[] = [];
+
+  holidays: CalendarEvent[] = [];
 
   constructor(
     private modal: NgbModal,
@@ -268,8 +270,41 @@ export class CalendarComponent {
     this.editApptForm = this.fb.group({
       title: [""],
     });
-    this.holiday.fetchHolidays();
+    // this.holiday.fetchHolidays();
+    this.holidays = await this.holiday.fetchHolidays();
     this.appts = await this.Eservice.getEvents();
-    console.log(this.appts);
+    // console.log(this.appts);
+    this.events.push(this.holidays);
+
+    this.appts.forEach((appt) => {
+      console.log(appt);
+      this.events.push({
+        start: new Date(appt.start),
+        end: new Date(appt.end),
+        title: appt.title,
+        color: colors.red,
+        actions: this.actions,
+        // allDay: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+        draggable: true,
+      });
+    });
+
+    // this.events.push({
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: "jjjjj",
+    //   color: colors.red,
+    //   actions: this.actions,
+    //   allDay: true,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    // });
   }
 }
