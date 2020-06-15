@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Icustomer } from "../interfaces/icustomer";
 import { CustomerService } from "../services/customer.service";
+import { Directive } from "@angular/core";
+import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
 
 @Component({
   selector: "app-customer",
@@ -33,5 +35,32 @@ export class CustomerComponent implements OnInit {
     const newCustomer = await this.service.addCustomer(this.customer);
     this.customers.push(newCustomer);
     console.log(newCustomer);
+  }
+
+  async delete() {}
+
+  // ************************************************
+
+  submitted = false;
+
+  genders = ["m", "f"];
+
+  onSubmit() {
+    this.submitted = true;
+  }
+
+  showFormControls(form: any) {
+    return (
+      form &&
+      form.controls["customer.firstName"] &&
+      form.controls["customer.firstName"].value
+    ); // Dr. IQ
+  }
+
+  ValidatePhone(control: AbstractControl): { [key: string]: any } | null {
+    if (control.value && control.value.length != 10) {
+      return { phoneNumberInvalid: true };
+    }
+    return null;
   }
 }

@@ -40,5 +40,19 @@ namespace capstone.Controllers
             _context.SaveChanges();
             return customer;
         }
+
+        [HttpDelete]
+
+        public Customer HttpDelete([FromBody] Customer customer)
+        {
+            customer.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+            return null;
+        }
+
+
+
+
     }
 }

@@ -22,4 +22,10 @@ export class CustomerService {
       .post<Icustomer>(this.baseUrl + "customer", customer)
       .toPromise();
   }
+
+  async deleteCustomer(customer: Icustomer) {
+    await this.httpClient
+      .delete<Icustomer>(this.baseUrl + "customer")
+      .toPromise();
+  }
 }
