@@ -41,17 +41,28 @@ namespace capstone.Controllers
             return customer;
         }
 
-        [HttpDelete]
+        // [HttpDelete]
 
-        public Customer HttpDelete([FromBody] Customer customer)
+        // public Customer HttpDelete([FromBody] Customer customer)
+        // {
+        //     customer.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //     _context.Customers.Remove(customer);
+        //     _context.SaveChanges();
+        //     return null;
+        // }
+
+        [HttpDelete("{id}")]
+        public async Task<Customer> Delete(int id)
         {
-            customer.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            _context.Customers.Remove(customer);
-            _context.SaveChanges();
-            return null;
+            var del = await _context.Customers.FindAsync(id);
+
+            if (del != null)
+                _context.Remove(del);
+
+            await _context.SaveChangesAsync();
+
+            return del;
         }
-
-
 
 
     }

@@ -163,24 +163,6 @@ export class CalendarComponent {
       this.viewDate = date;
     }
   }
-  // *** boilerplate code from angular-calendar ***
-  // eventTimesChanged({
-  //   event,
-  //   newStart,
-  //   newEnd,
-  // }: CalendarEventTimesChangedEvent): void {
-  //   this.events = this.events.map((iEvent) => {
-  //     if (iEvent === event) {
-  //       return {
-  //         ...event,
-  //         start: newStart,
-  //         end: newEnd,
-  //       };
-  //     }
-  //     return iEvent;
-  //   });
-  //   this.handleEvent("Dropped or resized", event);
-  // }
 
   eventTimesChanged({
     event,

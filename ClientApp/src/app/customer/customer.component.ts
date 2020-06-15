@@ -54,7 +54,7 @@ export class CustomerComponent implements OnInit {
       form &&
       form.controls["customer.firstName"] &&
       form.controls["customer.firstName"].value
-    ); // Dr. IQ
+    );
   }
 
   ValidatePhone(control: AbstractControl): { [key: string]: any } | null {
