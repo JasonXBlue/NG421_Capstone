@@ -61,8 +61,8 @@ export class CalendarComponent {
   view: CalendarView = CalendarView.Month;
 
   //exclude Sunday as non-working day for client
-  // excludeDays: number[] = [0];
-  excludeDays: number[];
+  excludeDays: number[] = [0];
+  // excludeDays: number[];
 
   CalendarView = CalendarView;
 
@@ -272,10 +272,10 @@ export class CalendarComponent {
       title: [""],
     });
     // this.holiday.fetchHolidays();
-    this.holidays = await this.holiday.fetchHolidays();
+    // this.holidays = await this.holiday.fetchHolidays();
     this.appts = await this.Eservice.getEvents();
     // console.log(this.appts);
-    this.events.push(this.holidays);
+    // this.events.push(this.holidays);
 
     this.appts.forEach((appt) => {
       console.log(appt);
