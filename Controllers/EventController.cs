@@ -40,5 +40,19 @@ namespace capstone.Controllers
             _context.SaveChanges();
             return calendarEvent;
         }
+
+        [HttpDelete("{id}")]
+        public async Task<Event> Delete(int id)
+        {
+            var del = await _context.Events.FindAsync(id);
+
+            if (del != null)
+                _context.Remove(del);
+
+            await _context.SaveChangesAsync();
+
+            return del;
+        }
+
     }
 }

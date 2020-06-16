@@ -11,6 +11,7 @@ import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
 })
 export class CustomerComponent implements OnInit {
   customer: Icustomer = {
+    id: 0,
     firstName: "",
     lastName: "",
     gender: "",
@@ -37,7 +38,10 @@ export class CustomerComponent implements OnInit {
     console.log(newCustomer);
   }
 
-  async delete() {}
+  async delete(customer) {
+    await this.service.deleteCustomer(customer.id);
+    this.customers = this.customers.filter((c) => c.id !== customer.id);
+  }
 
   // ************************************************
 

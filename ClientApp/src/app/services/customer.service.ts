@@ -23,16 +23,9 @@ export class CustomerService {
       .toPromise();
   }
 
-  // async deleteCustomer(customer: Icustomer) {
-  //   await this.httpClient
-  //     .delete<Icustomer>(this.baseUrl + "customer")
-  //     .toPromise();
-  // }
-
-  async deleteCustomer(customer: any) {
-    return await this.httpClient
-      // .delete<Icustomer>("${this.baseUrl}customer/${userId}")
-      .delete<Icustomer>(this.baseUrl + "customer", customer)
+  async deleteCustomer(id: number) {
+    await this.httpClient
+      .delete<Icustomer>(this.baseUrl + "customer/" + id)
       .toPromise();
   }
 }

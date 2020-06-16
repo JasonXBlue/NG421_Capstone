@@ -9,14 +9,20 @@
       <th>End</th>
       <th>Title</th>
       <th>Appt Type</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let s of events">
-      <td>{{ s.start }}</td>
-      <td>{{ s.end }}</td>
+      <td>{{ s.start | date: "medium" }}</td>
+      <td>{{ s.end | date: "medium" }}</td>
       <td>{{ s.title }}</td>
       <td>{{ s.apptType }}</td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="delete(s)">
+          Delete
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

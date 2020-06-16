@@ -20,4 +20,10 @@ export class EventService {
       .post<Ievent>(this.baseUrl + "event", event)
       .toPromise();
   }
+
+  async deleteEvent(id: number) {
+    await this.httpClient
+      .delete<Ievent>(this.baseUrl + "event/" + id)
+      .toPromise();
+  }
 }

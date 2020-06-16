@@ -1,4 +1,5 @@
 export interface Icustomer {
+  id: number;
   firstName: string;
   lastName: string;
   gender: string;

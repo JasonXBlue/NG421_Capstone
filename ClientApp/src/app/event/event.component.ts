@@ -9,6 +9,7 @@ import { EventService } from "../services/event.service";
 })
 export class EventComponent implements OnInit {
   event: Ievent = {
+    id: 0,
     start: new Date(),
     end: new Date(),
     title: "",
@@ -28,5 +29,10 @@ export class EventComponent implements OnInit {
     const newEvent = await this.service.addEvent(this.event);
     this.events.push(newEvent);
     console.log(newEvent);
+  }
+
+  async delete(event) {
+    await this.service.deleteEvent(event.id);
+    this.events = this.events.filter((c) => c.id !== event.id);
   }
 }
