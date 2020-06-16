@@ -35,6 +35,7 @@ export class HolidayApiService {
   events: CalendarEventWithMeta[] = [];
 
   constructor(private http: HttpClient) {}
+  //constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   // public fetchHolidays(): Promise<Holiday> {
   //   this.http
@@ -62,4 +63,32 @@ export class HolidayApiService {
   // this.cdr.markForCheck();
   //       });
   //   }
+
+  // public fetchHolidays() {
+  //   this.http
+  //     .get<{ holidays: Holiday[] }>(
+  //       "https://calendarific.com/api/v2/holidays",
+  //       {
+  //         params: {
+  //           api_key: HOLIDAY_API_KEY,
+  //           country: COUNTRY_CODE,
+  //           year: String(new Date().getFullYear()),
+  //         },
+  //       }
+  //     )
+  //     .subscribe(({ holidays }) => {
+  //       this.events = holidays.map((holiday) => {
+  //         return {
+  //           start: new Date(holiday.date),
+  //           title: holiday.name,
+  //           allDay: true,
+  //           meta: {
+  //             type: "holiday",
+  //             holiday,
+  //           },
+  //         };
+  //       });
+  //       this.cdr.markForCheck();
+  //     });
+  // }
 }
