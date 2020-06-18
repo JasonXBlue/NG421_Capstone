@@ -1,8 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Icustomer } from "../interfaces/icustomer";
 import { CustomerService } from "../services/customer.service";
 import { Directive } from "@angular/core";
 import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { CustomerDialogComponent } from "../customer-dialog/customer-dialog.component";
+import { MatTableDataSource, MatSort } from "@angular/material";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MaterialModule } from "../material.module";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-customer",
@@ -25,11 +32,52 @@ export class CustomerComponent implements OnInit {
 
   customers: Icustomer[] = [];
 
-  constructor(private service: CustomerService) {}
+  displayedColumns: string[] = [
+    "id",
+    "firstName",
+    "lastName",
+    "gender",
+    "phone",
+    "email",
+    "stAddress",
+    "city",
+    "state",
+    "zip",
+    "actions",
+  ];
+  dataSource = new MatTableDataSource<Icustomer>();
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  constructor(private service: CustomerService, public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CustomerDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.loadCustomersDataSource();
+    });
+  }
 
   async ngOnInit() {
-    this.customers = await this.service.getCustomers();
-    console.log(this.customers);
+    await this.loadCustomersDataSource();
+  }
+
+  async loadCustomersDataSource() {
+    const data = await this.service.getCustomers();
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  async applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   async save() {
@@ -40,31 +88,6 @@ export class CustomerComponent implements OnInit {
 
   async delete(customer) {
     await this.service.deleteCustomer(customer.id);
-    this.customers = this.customers.filter((c) => c.id !== customer.id);
-  }
-
-  // ************************************************
-
-  submitted = false;
-
-  genders = ["m", "f"];
-
-  onSubmit() {
-    this.submitted = true;
-  }
-
-  showFormControls(form: any) {
-    return (
-      form &&
-      form.controls["customer.firstName"] &&
-      form.controls["customer.firstName"].value
-    );
-  }
-
-  ValidatePhone(control: AbstractControl): { [key: string]: any } | null {
-    if (control.value && control.value.length != 10) {
-      return { phoneNumberInvalid: true };
-    }
-    return null;
+    await this.loadCustomersDataSource();
   }
 }

@@ -1,0 +1,84 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>New Customer</h1>
+    <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          required
+          [(ngModel)]="customer.firstName"
+          name="firstName"
+          #name="ngModel"
+        />
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          First Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          required
+          [(ngModel)]="customer.lastName"
+          name="lastName"
+          #name="ngModel"
+        />
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Last Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          [(ngModel)]="customer.phone"
+          name="phone"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="customer.email"
+          name="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select
+          class="form-control"
+          id="gender"
+          required
+          [(ngModel)]="customer.gender"
+          name="gender"
+          #gender="ngModel"
+        >
+          <option *ngFor="let gen of genders" [value]="gen">{{ gen }}</option>
+        </select>
+        <div
+          [hidden]="gender.valid || gender.pristine"
+          class="alert alert-danger"
+        >
+          Gender is required
+        </div>
+      </div>
+      <button type="button" class="btn btn-success" (click)="save()">
+        New Customer
+      </button>
+      <i>without</i> reset
+    </form>
+  </div>
+</div>

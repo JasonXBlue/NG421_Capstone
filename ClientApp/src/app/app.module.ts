@@ -21,6 +21,12 @@ import { NgbModalModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ReactiveFormsModule } from "@angular/forms";
 import { EventComponent } from "./event/event.component";
 import { CustomerComponent } from "./customer/customer.component";
+import { CustomerDialogComponent } from "./customer-dialog/customer-dialog.component";
+import { MatPaginatorModule } from "@angular/material";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material";
+import { MatSelectModule } from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { CustomerComponent } from "./customer/customer.component";
     EventComponent,
     CustomerComponent,
     CalendarComponent,
+    CustomerDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -45,6 +52,11 @@ import { CustomerComponent } from "./customer/customer.component";
     NgbModalModule,
     NgbModule,
     CommonModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
     ReactiveFormsModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
@@ -53,6 +65,7 @@ import { CustomerComponent } from "./customer/customer.component";
     }),
   ],
   exports: [CalendarComponent],
+  entryComponents: [CustomerDialogComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
   ],
