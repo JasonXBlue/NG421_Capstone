@@ -1,6 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Ievent } from "../interfaces/ievent";
 import { EventService } from "../services/event.service";
+import { MaterialModule } from "../material.module";
+import {
+  MatTableDataSource,
+  MatSort,
+  MatPaginator,
+  MatDialog,
+} from "@angular/material";
+import { Icustomer } from "../interfaces/icustomer";
+import { EventDialogComponent } from "../event-dialog/event-dialog.component";
 
 @Component({
   selector: "app-event",
@@ -18,11 +27,53 @@ export class EventComponent implements OnInit {
 
   events: Ievent[] = [];
 
-  constructor(private service: EventService) {}
+  displayedColumns: string[] = [
+    "id",
+    "start",
+    "end",
+    "title",
+    "apptType",
+    "actions",
+  ];
+
+  dataSource = new MatTableDataSource<Ievent>();
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  constructor(private service: EventService, public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(EventDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.loadCustomersDataSource();
+    });
+  }
+
+  // async ngOnInit() {
+  //   this.events = await this.service.getEvents();
+  //   console.log(this.events);
+  // }
 
   async ngOnInit() {
-    this.events = await this.service.getEvents();
-    console.log(this.events);
+    await this.loadCustomersDataSource();
+  }
+
+  async loadCustomersDataSource() {
+    const data = await this.service.getEvents();
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  async applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   async save() {

@@ -1,4 +1,4 @@
-<h1 id="tableLabel">Events</h1>
+<!-- <h1 id="tableLabel">Events</h1>
 
 <p *ngIf="!events"><em>Loading...</em></p>
 
@@ -34,4 +34,90 @@ Title
 <input [(ngModel)]="event.title" type="text" name="title" />
 ApptType
 <input [(ngModel)]="event.apptType" type="text" name="apptType" />
-<button (click)="save()">Save</button>
+<button (click)="save()">Save</button> -->
+
+<section class="mat-typography">
+  <h1 class="mat-headline" align="center">Events</h1>
+</section>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" />
+</mat-form-field>
+<div>
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    New Event
+  </button>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8"
+    align="center"
+    width="100%"
+  >
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <font color="#E91E63">ID</font>
+      </th>
+
+      <td mat-cell *matCellDef="let element">
+        {{ element.id }}
+      </td>
+    </ng-container>
+
+    <!--  Start Time Column -->
+    <ng-container matColumnDef="start">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <font color="#E91E63">Start Time</font>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.start }}
+      </td>
+    </ng-container>
+
+    <!-- End Time Column -->
+    <ng-container matColumnDef="end">
+      <th mat-header-cell *matHeaderCellDef>
+        <font color="#E91E63">End Time</font>
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.end }}</td>
+    </ng-container>
+
+    <!-- Title column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header MatSortActive>
+        <font color="#E91E63">Title</font>
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+    <!-- Appt Type Column -->
+    <ng-container matColumnDef="apptType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header MatSortActive>
+        <font color="#E91E63">Appt Type</font>
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.apptType }}</td>
+    </ng-container>
+    <th></th>
+    <ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-fab color="primary" (click)="delete(row)">
+            Delete
+          </button>
+        </mat-cell>
+      </ng-container>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSize]="20"
+    [pageSizeOptions]="[3, 6, 12, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

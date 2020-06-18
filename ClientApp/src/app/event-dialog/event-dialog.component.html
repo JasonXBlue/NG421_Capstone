@@ -1,0 +1,64 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>New Customer</h1>
+    <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+      <div class="form-group">
+        <label for="start">Start</label>
+        <input
+          type="text"
+          class="form-control"
+          id="start"
+          required
+          [(ngModel)]="event.start"
+          name="start"
+          #name="ngModel"
+        />
+        <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            First Name is required
+          </div> -->
+      </div>
+
+      <div class="form-group">
+        <label for="end">End</label>
+        <input
+          type="text"
+          class="form-control"
+          id="end"
+          required
+          [(ngModel)]="event.end"
+          name="end"
+          #name="ngModel"
+        />
+        <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            Last Name is required
+          </div> -->
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="event.title"
+          name="title"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="apptType">Appt Type</label>
+        <input
+          type="text"
+          class="form-control"
+          id="apptType"
+          [(ngModel)]="event.apptType"
+          name="apptType"
+        />
+      </div>
+      <button type="button" class="btn btn-success" (click)="save()">
+        New Event
+      </button>
+      <i>without</i> reset
+    </form>
+  </div>
+</div>

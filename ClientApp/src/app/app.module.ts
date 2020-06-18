@@ -27,6 +27,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
+import { EventDialogComponent } from "./event-dialog/event-dialog.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatButtonModule } from "@angular/material/button";
     CustomerComponent,
     CalendarComponent,
     CustomerDialogComponent,
+    EventDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -65,7 +67,7 @@ import { MatButtonModule } from "@angular/material/button";
     }),
   ],
   exports: [CalendarComponent],
-  entryComponents: [CustomerDialogComponent],
+  entryComponents: [CustomerDialogComponent, EventDialogComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
   ],
