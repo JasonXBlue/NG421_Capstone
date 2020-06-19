@@ -6,11 +6,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { HomeComponent } from "./home/home.component";
-import { CounterComponent } from "./counter/counter.component";
 import { ApiAuthorizationModule } from "src/api-authorization/api-authorization.module";
 import { AuthorizeInterceptor } from "src/api-authorization/authorize.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AppointmentComponent } from "./appointment/appointment.component";
 import { MaterialModule } from "./material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { CalendarComponent } from "./calendar/calendar.component";
@@ -34,8 +32,6 @@ import { EventDialogComponent } from "./event-dialog/event-dialog.component";
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    AppointmentComponent,
     CalendarComponent,
     EventComponent,
     CustomerComponent,
