@@ -35,9 +35,9 @@ Title
 ApptType
 <input [(ngModel)]="event.apptType" type="text" name="apptType" />
 <button (click)="save()">Save</button> -->
-
+<p *ngIf="!events"><em>Loading...</em></p>
 <section class="mat-typography">
-  <h1 class="mat-headline" align="center">Events</h1>
+  <h1 class="mat-headline" align="center">Appointments</h1>
 </section>
 <mat-form-field>
   <mat-label>Filter</mat-label>
@@ -45,7 +45,7 @@ ApptType
 </mat-form-field>
 <div>
   <button mat-raised-button color="primary" (click)="openDialog()">
-    New Event
+    New Appointment
   </button>
   <table
     mat-table
