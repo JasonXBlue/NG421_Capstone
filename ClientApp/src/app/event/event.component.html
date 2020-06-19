@@ -75,7 +75,7 @@ ApptType
         <font color="#E91E63">Start Time</font>
       </th>
       <td mat-cell *matCellDef="let element">
-        {{ element.start }}
+        {{ element.start | date: "medium" }}
       </td>
     </ng-container>
 
@@ -84,7 +84,9 @@ ApptType
       <th mat-header-cell *matHeaderCellDef>
         <font color="#E91E63">End Time</font>
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.end }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.end | date: "medium" }}
+      </td>
     </ng-container>
 
     <!-- Title column -->

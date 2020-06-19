@@ -1,11 +1,11 @@
 <div class="container">
   <div [hidden]="submitted">
-    <h1>New Customer</h1>
+    <h1>New Appointment</h1>
     <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
       <div class="form-group">
         <label for="start">Start</label>
         <input
-          type="text"
+          type="datetime-local"
           class="form-control"
           id="start"
           required
@@ -21,7 +21,7 @@
       <div class="form-group">
         <label for="end">End</label>
         <input
-          type="text"
+          type="datetime-local"
           class="form-control"
           id="end"
           required
@@ -35,7 +35,7 @@
       </div>
 
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Name</label>
         <input
           type="text"
           class="form-control"
