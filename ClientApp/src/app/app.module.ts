@@ -26,6 +26,7 @@ import { MatInputModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { EventDialogComponent } from "./event-dialog/event-dialog.component";
+import { ApiBirthdayComponent } from './api-birthday/api-birthday.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { EventDialogComponent } from "./event-dialog/event-dialog.component";
     CalendarComponent,
     CustomerDialogComponent,
     EventDialogComponent,
+    ApiBirthdayComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

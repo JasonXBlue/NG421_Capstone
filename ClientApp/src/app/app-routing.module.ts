@@ -6,6 +6,7 @@ import { AuthorizeGuard } from "src/api-authorization/authorize.guard";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { EventComponent } from "./event/event.component";
 import { CustomerComponent } from "./customer/customer.component";
+import { ApiBirthdayComponent } from "./api-birthday/api-birthday.component";
 
 @NgModule({
   declarations: [],
@@ -16,6 +17,7 @@ import { CustomerComponent } from "./customer/customer.component";
       { path: "calendar", component: CalendarComponent },
       { path: "events", component: EventComponent },
       { path: "customers", component: CustomerComponent },
+      { path: "birthdays", component: ApiBirthdayComponent },
     ]),
   ],
   exports: [RouterModule],
