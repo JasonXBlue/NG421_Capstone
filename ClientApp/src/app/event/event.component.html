@@ -58,8 +58,8 @@ ApptType
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
+    <!-- Id Column -->
+    <!-- <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         <font color="#E91E63">ID</font>
       </th>
@@ -67,7 +67,7 @@ ApptType
       <td mat-cell *matCellDef="let element">
         {{ element.id }}
       </td>
-    </ng-container>
+    </ng-container> -->
 
     <!--  Start Time Column -->
     <ng-container matColumnDef="start">
@@ -92,7 +92,7 @@ ApptType
     <!-- Title column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header MatSortActive>
-        <font color="#E91E63">Title</font>
+        <font color="#E91E63">Customer</font>
       </th>
       <td mat-cell *matCellDef="let element">
         {{ element.title | titlecase }}

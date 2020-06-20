@@ -33,7 +33,7 @@ export class CustomerComponent implements OnInit {
   customers: Icustomer[] = [];
 
   displayedColumns: string[] = [
-    "id",
+    //"id",
     "firstName",
     "lastName",
     "gender",

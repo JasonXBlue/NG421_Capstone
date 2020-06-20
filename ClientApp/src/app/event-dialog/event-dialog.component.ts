@@ -16,6 +16,8 @@ export class EventDialogComponent implements OnInit {
 
   submitted = false;
 
+  apptTypes = ["haircut", "color", "trim"];
+
   event = {
     id: 0,
     start: new Date(),

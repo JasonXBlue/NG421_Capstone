@@ -47,13 +47,15 @@
 
       <div class="form-group">
         <label for="apptType">Appt Type</label>
-        <input
+        <select
           type="text"
           class="form-control"
           id="apptType"
           [(ngModel)]="event.apptType"
           name="apptType"
-        />
+        >
+          <option *ngFor="let a of apptTypes" [value]="a">{{ a }}</option>
+        </select>
       </div>
       <button type="button" class="btn btn-success" (click)="save()">
         New Event

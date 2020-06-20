@@ -28,7 +28,7 @@ export class EventComponent implements OnInit {
   events: Ievent[] = [];
 
   displayedColumns: string[] = [
-    "id",
+    //"id",
     "start",
     "end",
     "title",
