@@ -4,6 +4,7 @@ import {
   ViewChild,
   TemplateRef,
   Injectable,
+  Input,
 } from "@angular/core";
 import {
   startOfDay,
@@ -15,7 +16,7 @@ import {
   isSameMonth,
   addHours,
 } from "date-fns";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
   CalendarEvent,
@@ -142,13 +143,18 @@ export class CalendarComponent {
 
   holidays: CalendarEvent[] = [];
 
+  @Input()
+  result$: Observable<any>;
+
   constructor(
     private modal: NgbModal,
     private fb: FormBuilder,
     private modalService: NgbModal,
     private Eservice: EventService,
     private holiday: HolidayApiService
-  ) {}
+  ) {
+    this.result$ = holiday.getHolidays();
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -258,6 +264,30 @@ export class CalendarComponent {
     this.appts = await this.Eservice.getEvents();
     // console.log(this.appts);
     // this.events.push(this.holidays);
+
+    this.result$.subscribe((res) => {
+      this.holidays = res.holidays;
+      console.log(this.holidays);
+      //this.events.push();
+      return this.holidays;
+    });
+
+    this.holidays.forEach((holiday) => {
+      console.log(holiday);
+      this.events.push({
+        start: new Date(holiday.start),
+        end: new Date(holiday.end),
+        title: holiday.title,
+        color: colors.red,
+        actions: this.actions,
+        allDay: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+        draggable: true,
+      });
+    });
 
     this.appts.forEach((appt) => {
       console.log(appt);

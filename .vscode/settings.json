@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/netcoreapp3.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/310135fa-721d-4640-99df-6fea96ef281d/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/hairbook"
+}
