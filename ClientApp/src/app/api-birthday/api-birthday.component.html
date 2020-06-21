@@ -14,6 +14,6 @@
 </ul> -->
 
 <div *ngFor="let item of birthdays | keyvalue">
-  {{ item | json }}
+  {{ item.value | json }}
   Object Key: {{ item.key }} and Object Value: {{ item.value }}
 </div>

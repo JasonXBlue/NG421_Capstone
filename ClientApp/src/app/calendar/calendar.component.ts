@@ -15,6 +15,7 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
+  parseISO,
 } from "date-fns";
 import { Subject, Observable } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -27,6 +28,7 @@ import {
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 import { EventService } from "../services/event.service";
 import { HolidayApiService } from "../services/holiday-api.service";
+import { Holiday } from "../interfaces/holiday";
 import { Ievent } from "../interfaces/ievent";
 import { EventDialogComponent } from "../event-dialog/event-dialog.component";
 import { MatDialog } from "@angular/material";
@@ -142,7 +144,8 @@ export class CalendarComponent {
 
   appts: Ievent[] = [];
 
-  holidays: CalendarEvent[] = [];
+  // holidays: CalendarEvent[] = [];
+  holidays: Holiday[] = [];
 
   @Input()
   result$: Observable<any>;
@@ -153,6 +156,7 @@ export class CalendarComponent {
     private modalService: NgbModal,
     private Eservice: EventService,
     private holiday: HolidayApiService,
+    private Holiday: HolidayApiService,
     public dialog: MatDialog
   ) {
     this.result$ = holiday.getHolidays();
@@ -248,6 +252,7 @@ export class CalendarComponent {
 
   async ngOnInit() {
     this.appts = await this.Eservice.getEvents();
+
     this.refresh.next();
     this.editApptForm = this.fb.group({
       title: [""],
@@ -290,6 +295,23 @@ export class CalendarComponent {
           afterEnd: true,
         },
         draggable: true,
+      });
+    });
+
+    this.holidays.forEach((hol) => {
+      this.events.push({
+        // start: new Date(parseISO("hol.date")),
+        // end: new Date(parseISO("hol.date")),
+        start: new Date(`${hol.date}`),
+        end: new Date(`${hol.date}`),
+        // end: new Date(hol.date),
+        title: hol.name,
+        color: colors.blue,
+        actions: this.actions,
+        // meta: {
+        //   type: 'holiday',
+        //   holiday,
+        // }
       });
     });
 
