@@ -8,7 +8,6 @@ import {
   MatPaginator,
   MatDialog,
 } from "@angular/material";
-import { Icustomer } from "../interfaces/icustomer";
 import { EventDialogComponent } from "../event-dialog/event-dialog.component";
 
 @Component({
@@ -27,14 +26,7 @@ export class EventComponent implements OnInit {
 
   events: Ievent[] = [];
 
-  displayedColumns: string[] = [
-    //"id",
-    "start",
-    "end",
-    "title",
-    "apptType",
-    "actions",
-  ];
+  displayedColumns: string[] = ["start", "end", "title", "apptType", "actions"];
 
   dataSource = new MatTableDataSource<Ievent>();
 
@@ -50,11 +42,6 @@ export class EventComponent implements OnInit {
       this.loadCustomersDataSource();
     });
   }
-
-  // async ngOnInit() {
-  //   this.events = await this.service.getEvents();
-  //   console.log(this.events);
-  // }
 
   async ngOnInit() {
     await this.loadCustomersDataSource();

@@ -31,13 +31,25 @@ export class ApiBirthdayComponent implements OnInit, PipeTransform {
     return values;
   }
 
+  // transform(birthday, args: string[]): any {
+  //   let birthdays = [];
+  //   for (let key in birthday) {
+  //     birthdays.push(birthday[key]);
+  //   }
+  //   console.log(this.birthdays);
+  //   return birthdays;
+  // }
+
   async getBirthdays() {
     return await this.httpClient.get<Ibirthday[]>(this.CELEB_URL).toPromise();
   }
 
   async ngOnInit() {
-    //const data = await this.getBirthdays();
     this.birthdays = await this.getBirthdays();
     console.log(this.birthdays);
+
+    // let bMap = new Map(Object.entries(this.birthdays));
+    // bMap.values();
+    // bMap.entries();
   }
 }

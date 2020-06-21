@@ -28,6 +28,8 @@ import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 import { EventService } from "../services/event.service";
 import { HolidayApiService } from "../services/holiday-api.service";
 import { Ievent } from "../interfaces/ievent";
+import { EventDialogComponent } from "../event-dialog/event-dialog.component";
+import { MatDialog } from "@angular/material";
 
 const colors: any = {
   red: {
@@ -59,11 +61,10 @@ export class CalendarComponent {
   name = new FormControl("");
   editApptForm: FormGroup;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
 
   //exclude Sunday as non-working day for client
   excludeDays: number[] = [0];
-  // excludeDays: number[];
 
   CalendarView = CalendarView;
 
@@ -151,9 +152,19 @@ export class CalendarComponent {
     private fb: FormBuilder,
     private modalService: NgbModal,
     private Eservice: EventService,
-    private holiday: HolidayApiService
+    private holiday: HolidayApiService,
+    public dialog: MatDialog
   ) {
     this.result$ = holiday.getHolidays();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(EventDialogComponent);
+    this.refresh.next();
+
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   this.loadCustomersDataSource();
+    // });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -189,31 +200,12 @@ export class CalendarComponent {
     }, 1000);
   }
 
-  //*** original code from example ***
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: "lg" });
   }
 
-  // addEvent(): void {
-  //   this.events = [
-  //     ...this.events,
-  //     {
-  //       title: "New event",
-  //       start: startOfDay(new Date()),
-  //       end: endOfDay(new Date()),
-  //       color: colors.red,
-  //       draggable: true,
-  //       resizable: {
-  //         beforeStart: true,
-  //         afterEnd: true,
-  //       },
-  //     },
-  //   ];
-  // }
-
   addEvent(): void {
-    //this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: "lg" });
   }
 
@@ -252,45 +244,40 @@ export class CalendarComponent {
 
   dayHeaderClicked(evn) {
     this.viewDate = evn.day.date; //get the clicked date value
-    console.log(this.viewDate);
   }
 
   async ngOnInit() {
+    this.appts = await this.Eservice.getEvents();
+    this.refresh.next();
     this.editApptForm = this.fb.group({
       title: [""],
     });
-    // this.holiday.fetchHolidays();
-    // this.holidays = await this.holiday.fetchHolidays();
-    this.appts = await this.Eservice.getEvents();
-    // console.log(this.appts);
-    // this.events.push(this.holidays);
+    // this.appts = await this.Eservice.getEvents();
 
     this.result$.subscribe((res) => {
       this.holidays = res.holidays;
       console.log(this.holidays);
-      //this.events.push();
+
       return this.holidays;
     });
 
-    this.holidays.forEach((holiday) => {
-      console.log(holiday);
-      this.events.push({
-        start: new Date(holiday.start),
-        end: new Date(holiday.end),
-        title: holiday.title,
-        color: colors.red,
-        actions: this.actions,
-        allDay: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-        draggable: true,
-      });
-    });
+    // this.holidays.forEach((holiday) => {
+    //   this.events.push({
+    //     start: new Date(holiday.start),
+    //     end: new Date(holiday.end),
+    //     title: holiday.title,
+    //     color: colors.red,
+    //     actions: this.actions,
+    //     allDay: true,
+    //     resizable: {
+    //       beforeStart: true,
+    //       afterEnd: true,
+    //     },
+    //     draggable: true,
+    //   });
+    // });
 
     this.appts.forEach((appt) => {
-      console.log(appt);
       this.events.push({
         start: new Date(appt.start),
         end: new Date(appt.end),

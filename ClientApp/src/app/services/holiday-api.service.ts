@@ -47,67 +47,8 @@ export class HolidayApiService {
   constructor(private http: HttpClient) {}
 
   getHolidays(): Observable<{ response: any }> {
-    console.log("Holiday request sent!");
-
     return this.http
       .get<{ response: any }>(this.URL)
       .pipe(map((res) => res.response));
   }
-
-  //constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
-
-  // public fetchHolidays(): Promise<Holiday> {
-  //   this.http
-  //     .get<CalendarEvent[]>("https://calendarific.com/api/v2/holidays", {
-  //       params: {
-  //         api_key: HOLIDAY_API_KEY,
-  //         country: COUNTRY_CODE,
-  //         year: String(new Date().getFullYear()),
-  //       },
-  //     })
-  //     .subscribe((holidays) => {
-  //       this.events = holidays.response.holidays.map((holiday) => {
-  //         console.log(holiday);
-  //         return {
-  //           start: new Date(holiday.date.iso),
-  //           title: holiday.name,
-  //           allDay: true,
-  //           meta: {
-  //             type: "holiday",
-  //             holiday,
-  //           },
-  //         };
-  //       });
-
-  // this.cdr.markForCheck();
-  //       });
-  //   }
-
-  // public fetchHolidays() {
-  //   this.http
-  //     .get<{ holidays: Holiday[] }>(
-  //       "https://calendarific.com/api/v2/holidays",
-  //       {
-  //         params: {
-  //           api_key: HOLIDAY_API_KEY,
-  //           country: COUNTRY_CODE,
-  //           year: String(new Date().getFullYear()),
-  //         },
-  //       }
-  //     )
-  //     .subscribe(({ holidays }) => {
-  //       this.events = holidays.map((holiday) => {
-  //         return {
-  //           start: new Date(holiday.date),
-  //           title: holiday.name,
-  //           allDay: true,
-  //           meta: {
-  //             type: "holiday",
-  //             holiday,
-  //           },
-  //         };
-  //       });
-  //       this.cdr.markForCheck();
-  //     });
-  // }
 }
