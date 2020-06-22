@@ -55,7 +55,6 @@
         Day
       </div>
     </div>
-    <!-- <div class="btn btn-primary" (click)="addEvent()"> -->
     <div class="btn btn-primary" (click)="openDialog()">
       Add New
     </div>
@@ -114,14 +113,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <!-- <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
-    </div> -->
-    <!-- <div>
-      Title:
-      <pre>{{ modalData?.event.title }}</pre>
-    </div> -->
     <div>
       <form [formGroup]="editApptForm">
         <div class="form-group row">
@@ -142,10 +133,6 @@
       Start Time:
       <pre>{{ modalData?.event.start | date: "medium" }}</pre>
     </div>
-    <!-- <div>
-      Event:
-      <pre>{{ modalData?.event | json }}</pre>
-    </div> -->
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-success" (click)="close()">

@@ -14,9 +14,21 @@ import { ApiBirthdayComponent } from "./api-birthday/api-birthday.component";
     CommonModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },
-      { path: "calendar", component: CalendarComponent },
-      { path: "events", component: EventComponent },
-      { path: "customers", component: CustomerComponent },
+      {
+        path: "calendar",
+        component: CalendarComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: "events",
+        component: EventComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: "customers",
+        component: CustomerComponent,
+        canActivate: [AuthorizeGuard],
+      },
       { path: "birthdays", component: ApiBirthdayComponent },
     ]),
   ],

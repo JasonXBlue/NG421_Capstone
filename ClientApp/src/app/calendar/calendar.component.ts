@@ -100,51 +100,37 @@ export class CalendarComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    //   {
-    //     start: subDays(startOfDay(new Date()), 1),
-    //     end: addDays(new Date(), 1),
-    //     title: "A 3 day event",
-    //     color: colors.red,
-    //     actions: this.actions,
-    //     allDay: true,
-    //     resizable: {
-    //       beforeStart: true,
-    //       afterEnd: true,
-    //     },
-    //     draggable: true,
-    //   },
-    //   {
-    //     start: startOfDay(new Date()),
-    //     title: "An event with no end date",
-    //     color: colors.yellow,
-    //     actions: this.actions,
-    //   },
-    //   {
-    //     start: subDays(endOfMonth(new Date()), 3),
-    //     end: addDays(endOfMonth(new Date()), 3),
-    //     title: "A long event that spans 2 months",
-    //     color: colors.blue,
-    //     allDay: true,
-    //   },
-    //   {
-    //     start: addHours(startOfDay(new Date()), 2),
-    //     end: addHours(new Date(), 2),
-    //     title: "A draggable and resizable event",
-    //     color: colors.yellow,
-    //     actions: this.actions,
-    //     resizable: {
-    //       beforeStart: true,
-    //       afterEnd: true,
-    //     },
-    //     draggable: true,
-    //   },
+    {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: "Customer Name",
+      color: colors.red,
+      actions: this.actions,
+      allDay: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+    },
+    {
+      start: addHours(startOfDay(new Date()), 2),
+      end: addHours(new Date(), 2),
+      title: "A draggable and resizable event",
+      color: colors.yellow,
+      actions: this.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+    },
   ];
 
   activeDayIsOpen: boolean = true;
 
   appts: Ievent[] = [];
 
-  // holidays: CalendarEvent[] = [];
   holidays: Holiday[] = [];
 
   @Input()
@@ -165,10 +151,6 @@ export class CalendarComponent {
   openDialog() {
     const dialogRef = this.dialog.open(EventDialogComponent);
     this.refresh.next();
-
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   this.loadCustomersDataSource();
-    // });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -257,7 +239,6 @@ export class CalendarComponent {
     this.editApptForm = this.fb.group({
       title: [""],
     });
-    // this.appts = await this.Eservice.getEvents();
 
     this.result$.subscribe((res) => {
       this.holidays = res.holidays;
@@ -266,22 +247,6 @@ export class CalendarComponent {
       return this.holidays;
     });
 
-    // this.holidays.forEach((holiday) => {
-    //   this.events.push({
-    //     start: new Date(holiday.start),
-    //     end: new Date(holiday.end),
-    //     title: holiday.title,
-    //     color: colors.red,
-    //     actions: this.actions,
-    //     allDay: true,
-    //     resizable: {
-    //       beforeStart: true,
-    //       afterEnd: true,
-    //     },
-    //     draggable: true,
-    //   });
-    // });
-
     this.appts.forEach((appt) => {
       this.events.push({
         start: new Date(appt.start),
@@ -289,7 +254,6 @@ export class CalendarComponent {
         title: appt.title,
         color: colors.red,
         actions: this.actions,
-        // allDay: true,
         resizable: {
           beforeStart: true,
           afterEnd: true,
@@ -304,29 +268,10 @@ export class CalendarComponent {
         // end: new Date(parseISO("hol.date")),
         start: new Date(`${hol.date}`),
         end: new Date(`${hol.date}`),
-        // end: new Date(hol.date),
         title: hol.name,
         color: colors.blue,
         actions: this.actions,
-        // meta: {
-        //   type: 'holiday',
-        //   holiday,
-        // }
       });
     });
-
-    // this.events.push({
-    //   start: subDays(startOfDay(new Date()), 1),
-    //   end: addDays(new Date(), 1),
-    //   title: "jjjjj",
-    //   color: colors.red,
-    //   actions: this.actions,
-    //   allDay: true,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true,
-    //   },
-    //   draggable: true,
-    // });
   }
 }

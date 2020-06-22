@@ -4,9 +4,12 @@ import {
   Injectable,
   PipeTransform,
   Pipe,
+  Input,
 } from "@angular/core";
 import { Ibirthday } from "../interfaces/ibirthday";
+import { BirthdayService } from "../services/birthday.service";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Pipe({ name: "values" })
 @Component({
@@ -15,41 +18,32 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./api-birthday.component.css"],
 })
 @Injectable()
-export class ApiBirthdayComponent implements OnInit, PipeTransform {
-  private CELEB_URL =
-    "https://cors-anywhere.herokuapp.com/https://celebritybucks.com/developers/birthdays/JSON";
+export class ApiBirthdayComponent implements OnInit {
+  // private CELEB_URL =
+  //   "https://cors-anywhere.herokuapp.com/https://celebritybucks.com/developers/birthdays/JSON";
 
-  birthdays: Ibirthday[] = [];
+  birthdays: Ibirthday[];
 
-  constructor(private httpClient: HttpClient) {}
+  @Input()
+  result$: Observable<any>;
 
-  transform(value, args: string[]): any {
-    let values = [];
-    for (let key in value) {
-      values.push(value[key]);
-    }
-    return values;
+  constructor(private birthdayService: BirthdayService) {
+    this.result$ = birthdayService.getBirthdays();
   }
 
-  // transform(birthday, args: string[]): any {
-  //   let birthdays = [];
-  //   for (let key in birthday) {
-  //     birthdays.push(birthday[key]);
-  //   }
-  //   console.log(this.birthdays);
-  //   return birthdays;
+  // async getBirthdays() {
+  //   return await this.httpClient.get<Ibirthday[]>(this.CELEB_URL).toPromise();
   // }
 
-  async getBirthdays() {
-    return await this.httpClient.get<Ibirthday[]>(this.CELEB_URL).toPromise();
-  }
-
   async ngOnInit() {
-    this.birthdays = await this.getBirthdays();
-    console.log(this.birthdays);
+    // this.birthdays = await this.birthdayService.getBirthdays();
+    // console.log(this.birthdays);
 
-    // let bMap = new Map(Object.entries(this.birthdays));
-    // bMap.values();
-    // bMap.entries();
+    this.result$.subscribe((res) => {
+      this.birthdays = res.birthdays;
+      // console.log(this.birthdays);
+
+      return this.birthdays;
+    });
   }
 }

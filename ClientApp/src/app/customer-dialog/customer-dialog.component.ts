@@ -91,8 +91,6 @@ export class CustomerDialogComponent {
 
   async save() {
     const newCustomer = await this.service.addCustomer(this.customer);
-    // this.customers.push(newCustomer);
-    // console.log(newCustomer);
     this.dialogRef.close(newCustomer);
   }
 
