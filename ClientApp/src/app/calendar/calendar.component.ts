@@ -100,31 +100,31 @@ export class CalendarComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: "Customer Name",
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: "A draggable and resizable event",
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+    // {
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: "Customer Name",
+    //   color: colors.red,
+    //   actions: this.actions,
+    //   allDay: true,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    // },
+    // {
+    //   start: addHours(startOfDay(new Date()), 2),
+    //   end: addHours(new Date(), 2),
+    //   title: "A draggable and resizable event",
+    //   color: colors.yellow,
+    //   actions: this.actions,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    // },
   ];
 
   activeDayIsOpen: boolean = true;
@@ -265,11 +265,11 @@ export class CalendarComponent {
       this.events.push({
         // start: new Date(parseISO("hol.date")),
         // end: new Date(parseISO("hol.date")),
-        start: new Date(`${hol.date}`),
-        end: new Date(`${hol.date}`),
+        start: new Date(`${hol.date.iso}`),
+        //end: new Date(`${hol.date}`),
+        allDay: true,
         title: hol.name,
         color: colors.blue,
-        actions: this.actions,
       });
     });
   }
