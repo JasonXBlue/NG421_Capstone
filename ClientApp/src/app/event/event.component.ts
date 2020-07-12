@@ -71,6 +71,7 @@ export class EventComponent implements OnInit {
 
   async delete(event) {
     await this.service.deleteEvent(event.id);
-    this.events = this.events.filter((c) => c.id !== event.id);
+    await this.loadCustomersDataSource();
+    //this.events = this.events.filter((c) => c.id !== event.id);
   }
 }
