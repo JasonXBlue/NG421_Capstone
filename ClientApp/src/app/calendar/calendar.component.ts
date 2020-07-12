@@ -234,7 +234,6 @@ export class CalendarComponent {
 
   async ngOnInit() {
     this.appts = await this.Eservice.getEvents();
-
     this.refresh.next();
     this.editApptForm = this.fb.group({
       title: [""],
