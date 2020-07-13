@@ -220,6 +220,11 @@ export class CalendarComponent {
     this.modal.dismissAll();
   }
 
+  deleteEventData(event) {
+    this.Eservice.deleteEvent(event.id);
+    // this.modal.dismissAll();
+  }
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -233,6 +238,7 @@ export class CalendarComponent {
   }
 
   async ngOnInit() {
+    //this.refresh.next();
     this.appts = await this.Eservice.getEvents();
     this.refresh.next();
     this.editApptForm = this.fb.group({
@@ -259,6 +265,7 @@ export class CalendarComponent {
         },
         draggable: true,
       });
+      this.refresh.next();
     });
 
     this.holidays.forEach((hol) => {
@@ -271,6 +278,34 @@ export class CalendarComponent {
         title: hol.name,
         color: colors.blue,
       });
+      this.refresh.next();
     });
   }
+
+  // async ngOnInit() {
+  //   await this.loadEvents();
+  //   this.refresh.next();
+  //   this.editApptForm = this.fb.group({
+  //     title: [""],
+  //   });
+
+  //   this.appts.forEach((appt) => {
+  //     this.events.push({
+  //       start: new Date(appt.start),
+  //       end: new Date(appt.end),
+  //       title: appt.title,
+  //       color: colors.red,
+  //       actions: this.actions,
+  //       resizable: {
+  //         beforeStart: true,
+  //         afterEnd: true,
+  //       },
+  //       draggable: true,
+  //     });
+  //   });
+  // }
+
+  // async loadEvents() {
+  //   const data = await this.Eservice.getEvents();
+  // }
 }

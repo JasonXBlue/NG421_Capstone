@@ -136,7 +136,12 @@
     <button type="button" class="btn btn-outline-success" (click)="close()">
       SAVE
     </button>
-    <button class="btn btn-danger" (click)="deleteEvent(modalData.event)">
+    <button
+      class="btn btn-danger"
+      (click)="
+        deleteEvent(modalData.event); deleteEventData(modalData.event.id)
+      "
+    >
       Delete
     </button>
   </div>
