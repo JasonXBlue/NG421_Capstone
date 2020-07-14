@@ -1,16 +1,11 @@
 <p>api-birthday works!</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Dob</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let b of birthdays">
-      <td>{{ b.name }}</td>
-      <td>{{ b.age }}</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <div *ngFor="let article of articles">
+    <h2>{{ article.name }}</h2>
+
+    <p>
+      {{ article.age }}
+    </p>
+  </div>
+</ul>
