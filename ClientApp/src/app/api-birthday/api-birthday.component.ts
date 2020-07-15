@@ -13,7 +13,7 @@ export class ApiBirthdayComponent implements OnInit {
 
   constructor(private apiService: BirthdayService) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.apiService.getBirthdays().subscribe((data) => {
       console.log(data);
       this.articles = data["articles"];

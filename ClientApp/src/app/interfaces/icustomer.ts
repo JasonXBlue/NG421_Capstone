@@ -8,5 +8,5 @@ export interface Icustomer {
   stAddress: string;
   city: string;
   state: string;
-  zip: number;
+  zip: string;
 }

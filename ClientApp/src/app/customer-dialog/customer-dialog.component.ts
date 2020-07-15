@@ -84,7 +84,7 @@ export class CustomerDialogComponent {
     stAddress: "",
     city: "",
     state: "",
-    zip: 79423,
+    zip: "",
   };
 
   customers: Icustomer[] = [];

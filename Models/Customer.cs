@@ -30,7 +30,7 @@ namespace capstone.Models
 
         public string State { get; set; }
 
-        public int Zip { get; set; }
+        public string Zip { get; set; }
 
         public string UserId { get; set; }
 
