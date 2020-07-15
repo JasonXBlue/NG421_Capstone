@@ -6,12 +6,15 @@
   <ul>
     <div *ngFor="let article of articles">
       <div *ngIf="article.price > 0">
-        <h2>{{ article.name }} age: {{ article.age }}</h2>
+        <h2>{{ article.name }}</h2>
         <img
           src="https://celebritybucks.com/images/celebs/full/{{
             article.celebId
           }}.jpg"
         />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   </ul>
