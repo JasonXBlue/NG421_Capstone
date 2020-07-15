@@ -27,7 +27,7 @@ export class CustomerComponent implements OnInit {
     stAddress: "",
     city: "",
     state: "",
-    zip: 79423,
+    zip: "",
   };
 
   customers: Icustomer[] = [];
@@ -35,7 +35,6 @@ export class CustomerComponent implements OnInit {
   displayedColumns: string[] = [
     "firstName",
     "lastName",
-
     "phone",
     "email",
     "stAddress",
