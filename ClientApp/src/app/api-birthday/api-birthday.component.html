@@ -1,11 +1,18 @@
-<p>api-birthday works!</p>
-
-<ul>
-  <div *ngFor="let article of articles">
-    <h2>{{ article.name }}</h2>
-
-    <p>
-      {{ article.age }}
-    </p>
-  </div>
-</ul>
+<!-- credit to celebritybucks.com for celebrity birthday info via their API -->
+<mat-card class="birthday-card">
+  <mat-card-header>
+    <mat-card-title>Today's Celebrity Birthdays</mat-card-title>
+  </mat-card-header>
+  <ul>
+    <div *ngFor="let article of articles">
+      <div *ngIf="article.price > 0">
+        <h2>{{ article.name }} age: {{ article.age }}</h2>
+        <img
+          src="https://celebritybucks.com/images/celebs/full/{{
+            article.celebId
+          }}.jpg"
+        />
+      </div>
+    </div>
+  </ul>
+</mat-card>
