@@ -33,7 +33,7 @@
           Last Name is required
         </div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="gender">Gender</label>
         <select
           class="form-control"
@@ -51,7 +51,7 @@
         >
           Gender is required
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label for="phone">Phone</label>
@@ -106,6 +106,16 @@
         >
           <option *ngFor="let s of states" [value]="s">{{ s }}</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip</label>
+        <input
+          type="number"
+          class="form-control"
+          id="zip"
+          [(ngModel)]="customer.zip"
+          name="zip"
+        />
       </div>
       <div class="text-center">
         <button type="button" class="btn btn-success" (click)="save()">

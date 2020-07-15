@@ -35,7 +35,7 @@ export class CustomerComponent implements OnInit {
   displayedColumns: string[] = [
     "firstName",
     "lastName",
-    "gender",
+
     "phone",
     "email",
     "stAddress",

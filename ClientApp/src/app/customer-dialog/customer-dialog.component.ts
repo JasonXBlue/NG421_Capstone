@@ -18,7 +18,7 @@ export class CustomerDialogComponent {
 
   submitted = false;
 
-  genders = ["m", "f"];
+  genders = ["M", "F"];
 
   states = [
     "AL",
