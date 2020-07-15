@@ -100,18 +100,18 @@
           class="form-control"
           id="state"
           required
-          [(ngModel)]="customer.gender"
+          [(ngModel)]="customer.state"
           name="state"
           #state="ngModel"
         >
           <option *ngFor="let s of states" [value]="s">{{ s }}</option>
         </select>
       </div>
-
-      <button type="button" class="btn btn-success" (click)="save()">
-        New Customer
-      </button>
-      <i>without</i> reset
+      <div class="text-center">
+        <button type="button" class="btn btn-success" (click)="save()">
+          Save
+        </button>
+      </div>
     </form>
   </div>
 </div>
