@@ -1,5 +1,8 @@
 .mat-headline {
-  color: #c2185b;
+  color: whitesmoke;
+  font-family: "Indie Flower", cursive;
+  font-size: 40px;
+  /* color: #c2185b;
   font-family: "Roboto", sans-serif;
-  font-size: 50px;
+  font-size: 50px; */
 }
