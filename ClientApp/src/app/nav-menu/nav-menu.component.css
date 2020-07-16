@@ -2,7 +2,8 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-  color: #e91e63;
+  /* color: #e91e63; */
+  color: #c2185b;
 }
 
 html {

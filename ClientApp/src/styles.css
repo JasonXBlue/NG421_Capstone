@@ -18,7 +18,8 @@ code {
 html,
 body {
   height: 100%;
-  background-image: url(./assets/img/blueback.jpeg);
+  /* background-image: url(./assets/img/blueback.jpeg); */
+  background-image: url(./assets/img/aluminum.jpg);
 }
 body {
   margin: 0;
