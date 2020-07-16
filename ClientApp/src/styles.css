@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~animate.css/animate.min";
+
+.animate__animated.animate__wobble {
+  --animate-duration: 15s;
+}
+.animate__animated.animate__heartBeat {
+  --animate-duration: 15s;
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
