@@ -5,14 +5,19 @@
 <section class="mat-typography">
   <h1 class="mat-headline" align="center">Customers</h1>
 </section>
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" />
-</mat-form-field>
+
 <div>
-  <button mat-raised-button color="primary" (click)="openDialog()">
-    New Customer
-  </button>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      New Customer
+    </button>
+    <button mat-raised-button color="primary">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" />
+      </mat-form-field>
+    </button>
+  </div>
   <table
     mat-table
     [dataSource]="dataSource"
