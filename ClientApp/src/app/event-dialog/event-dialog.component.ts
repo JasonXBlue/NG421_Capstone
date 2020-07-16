@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { EventService } from "../services/event.service";
 import { MatDialogRef } from "@angular/material";
 import { Ievent } from "../interfaces/ievent";
+import { CalendarComponent } from "../calendar/calendar.component";
 
 @Component({
   selector: "app-event-dialog",
@@ -11,6 +12,7 @@ import { Ievent } from "../interfaces/ievent";
 export class EventDialogComponent implements OnInit {
   constructor(
     private service: EventService,
+
     private dialogRef: MatDialogRef<EventDialogComponent>
   ) {}
 

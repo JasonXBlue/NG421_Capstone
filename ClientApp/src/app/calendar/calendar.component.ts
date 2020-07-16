@@ -193,6 +193,7 @@ export class CalendarComponent {
 
   addEvent(): void {
     this.modal.open(this.modalContent, { size: "lg" });
+    this.refresh.next();
   }
 
   hourSegmentClicked(event) {
@@ -238,19 +239,20 @@ export class CalendarComponent {
   }
 
   async ngOnInit() {
-    //this.refresh.next();
+    //await this.loadEvents();
+    // this.refresh.next();
     this.appts = await this.Eservice.getEvents();
-    this.refresh.next();
+    await this.refresh.next();
     this.editApptForm = this.fb.group({
       title: [""],
     });
 
-    this.result$.subscribe((res) => {
-      this.holidays = res.holidays;
-      console.log(this.holidays);
+    // this.result$.subscribe((res) => {
+    //   this.holidays = res.holidays;
+    //   console.log(this.holidays);
 
-      return this.holidays;
-    });
+    //   return this.holidays;
+    // });
 
     this.appts.forEach((appt) => {
       this.events.push({
@@ -268,18 +270,18 @@ export class CalendarComponent {
       this.refresh.next();
     });
 
-    this.holidays.forEach((hol) => {
-      this.events.push({
-        // start: new Date(parseISO("hol.date")),
-        // end: new Date(parseISO("hol.date")),
-        start: new Date(`${hol.date.iso}`),
-        //end: new Date(`${hol.date}`),
-        allDay: true,
-        title: hol.name,
-        color: colors.blue,
-      });
-      this.refresh.next();
-    });
+    // this.holidays.forEach((hol) => {
+    //   this.events.push({
+    //     // start: new Date(parseISO("hol.date")),
+    //     // end: new Date(parseISO("hol.date")),
+    //     start: new Date(`${hol.date.iso}`),
+    //     //end: new Date(`${hol.date}`),
+    //     allDay: true,
+    //     title: hol.name,
+    //     color: colors.blue,
+    //   });
+    //   this.refresh.next();
+    // });
   }
 
   // async ngOnInit() {
@@ -305,7 +307,7 @@ export class CalendarComponent {
   //   });
   // }
 
-  // async loadEvents() {
-  //   const data = await this.Eservice.getEvents();
-  // }
+  async loadEvents() {
+    const data = await this.Eservice.getEvents();
+  }
 }

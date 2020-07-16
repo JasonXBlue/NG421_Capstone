@@ -1,3 +1,9 @@
 .birthday-card {
   width: 45%;
+  display: inline-block;
+}
+
+.mat-card-cvr {
+  width: 100%;
+  text-align: center;
 }

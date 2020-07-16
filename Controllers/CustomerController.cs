@@ -54,6 +54,13 @@ namespace capstone.Controllers
             return del;
         }
 
+        // [HttpPut("{id}")]
 
+        // public IActionResult Put(int id, [FromBody] Customer updatedCustomer)
+        //     {
+        //         var cust = _context.Update(updatedCustomer);
+        //         if (cust == null) return NotFound();
+        //         return Ok(cust);
+        //     }
     }
 }
