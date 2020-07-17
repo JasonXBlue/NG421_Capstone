@@ -13,10 +13,12 @@ import { ApiBirthdayComponent } from "./api-birthday/api-birthday.component";
   imports: [
     CommonModule,
     RouterModule.forRoot([
-      { path: "", component: HomeComponent, pathMatch: "full" },
+      // { path: "", component: HomeComponent, pathMatch: "full" },
+      { path: "", component: CalendarComponent, pathMatch: "full" },
       {
         path: "calendar",
         component: CalendarComponent,
+
         canActivate: [AuthorizeGuard],
       },
       {

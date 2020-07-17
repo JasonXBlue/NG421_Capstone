@@ -145,12 +145,12 @@ export class CalendarComponent {
     private Holiday: HolidayApiService,
     public dialog: MatDialog
   ) {
-    this.result$ = holiday.getHolidays();
+    //this.result$ = holiday.getHolidays();
   }
 
-  openDialog() {
+  async openDialog() {
     const dialogRef = this.dialog.open(EventDialogComponent);
-    this.refresh.next();
+    await this.refresh.next();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -241,8 +241,11 @@ export class CalendarComponent {
   async ngOnInit() {
     //await this.loadEvents();
     // this.refresh.next();
-    this.appts = await this.Eservice.getEvents();
-    await this.refresh.next();
+    //this.appts = await this.Eservice.getEvents();
+    //await this.refresh.next();
+    this.appts = [];
+    await this.loadEvents();
+    //this.refresh.next();
     this.editApptForm = this.fb.group({
       title: [""],
     });
@@ -254,21 +257,21 @@ export class CalendarComponent {
     //   return this.holidays;
     // });
 
-    this.appts.forEach((appt) => {
-      this.events.push({
-        start: new Date(appt.start),
-        end: new Date(appt.end),
-        title: appt.title,
-        color: colors.red,
-        actions: this.actions,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-        draggable: true,
-      });
-      this.refresh.next();
-    });
+    // this.appts.forEach((appt) => {
+    //   this.events.push({
+    //     start: new Date(appt.start),
+    //     end: new Date(appt.end),
+    //     title: appt.title,
+    //     color: colors.red,
+    //     actions: this.actions,
+    //     resizable: {
+    //       beforeStart: true,
+    //       afterEnd: true,
+    //     },
+    //     draggable: true,
+    //   });
+    //   this.refresh.next();
+    // });
 
     // this.holidays.forEach((hol) => {
     //   this.events.push({
@@ -307,7 +310,27 @@ export class CalendarComponent {
   //   });
   // }
 
+  // async loadEvents() {
+  //   const data = await this.Eservice.getEvents();
+  // }
+
   async loadEvents() {
-    const data = await this.Eservice.getEvents();
+    this.appts = [];
+    this.appts = await this.Eservice.getEvents();
+    this.appts.forEach((appt) => {
+      this.events.push({
+        start: new Date(appt.start),
+        end: new Date(appt.end),
+        title: appt.title,
+        color: colors.red,
+        actions: this.actions,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+        draggable: true,
+      });
+      this.refresh.next();
+    });
   }
 }
