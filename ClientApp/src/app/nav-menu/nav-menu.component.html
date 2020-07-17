@@ -26,7 +26,7 @@
       </button>
 
       <div
-        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse animate__animated animate__heartBeat"
+        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
         [ngClass]="{ show: isExpanded }"
       >
         <app-login-menu></app-login-menu>
@@ -38,20 +38,28 @@
           >
             <!-- <a class="nav-link text-dark" [routerLink]="['/']">Home</a> -->
           </li>
+
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/calendar']"
-              >Calendar</a
-            >
+            <button mat-raised-button color="accent" class="navbar-btn">
+              <a class="nav-link text-dark" [routerLink]="['/calendar']"
+                >Calendar</a
+              >
+            </button>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <button mat-raised-button color="accent" class="navbar-btn">
+              <a class="nav-link text-dark" [routerLink]="['/events']"
+                >Appointments</a
+              >
+            </button>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/events']"
-              >Appointments</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/customers']"
-              >Customers</a
-            >
+            <button mat-raised-button color="accent" class="navbar-btn">
+              <a class="nav-link text-dark" [routerLink]="['/customers']"
+                >Customers</a
+              >
+            </button>
           </li>
         </ul>
       </div>
