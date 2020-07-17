@@ -7,3 +7,9 @@
   width: 100%;
   text-align: center;
 }
+.mat-headline {
+  /* color: #c2185b; */
+  color: whitesmoke;
+  font-family: "Indie Flower", cursive;
+  font-size: 40px;
+}

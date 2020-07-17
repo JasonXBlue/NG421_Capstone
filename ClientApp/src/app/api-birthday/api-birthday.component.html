@@ -1,27 +1,12 @@
 <!-- credit to celebritybucks.com for celebrity birthday info via their API -->
-<!-- <div class="mat-card-cvr">
-  <mat-card class="birthday-card">
-    <mat-card-header>
-      <mat-card-title>Today's Celebrity Birthdays</mat-card-title>
-    </mat-card-header>
-    <ul>
-      <div *ngFor="let article of articles">
-        <div *ngIf="article.price > 0">
-          <h2>{{ article.name }}</h2>
-          <img
-            src="https://celebritybucks.com/images/celebs/full/{{
-              article.celebId
-            }}.jpg"
-          />
-          <br />
-          <br />
-          <br />
-        </div>
-      </div>
-    </ul>
-  </mat-card>
-</div> -->
 
+<link
+  href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+  rel="stylesheet"
+/>
+<h1 class="mat-headline" style="text-align: center;">
+  Today's Celebrity Birthdays
+</h1>
 <div class="container">
   <div class="row">
     <div class="col-md-8 mx-auto my-3" *ngFor="let article of articles">
