@@ -115,6 +115,7 @@
 </div>
 
 <!-- *** modal *** -->
+
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Appointment</h5>
@@ -126,15 +127,16 @@
     <div>
       <form [formGroup]="editApptForm">
         <div class="form-group row">
-          <label for="title" class="col-sm-4 col-form-label">Name:</label>
+          <label for="title" class="col-sm-4 col-form-label"
+            >Name: {{ modalData?.event.title }}</label
+          >
           <div class="col-sm-8">
-            <input
-              type="text"
+            <!-- <input
               [(ngModel)]="modalData?.event.title"
               class="form-control"
               formControlName="title"
               id="title"
-            />
+            /> -->
           </div>
         </div>
       </form>
@@ -143,9 +145,13 @@
       Start Time:
       <pre>{{ modalData?.event.start | date: "medium" }}</pre>
     </div>
+    <div>
+      Appt Type:
+      <pre></pre>
+    </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="close()">
+    <!-- <button type="button" class="btn btn-outline-success" (click)="close()">
       SAVE
     </button>
     <button
@@ -155,6 +161,6 @@
       "
     >
       Delete
-    </button>
+    </button> -->
   </div>
 </ng-template>
